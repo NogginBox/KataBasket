@@ -5,7 +5,7 @@ namespace KataBasket.PriceCalculator
 
     public class StandardPriceCalculator : IPriceCalculator
     {
-        private decimal _unitPrice;
+        private readonly decimal _unitPrice;
 
         public StandardPriceCalculator(decimal unitPrice)
         {

@@ -51,19 +51,32 @@ namespace KataBasket.Tests
 
         }
 
-        [Fact]
-        public void Add3ItemsGivesDiscount()
+        [Theory]
+        [InlineData("A", 3, 25)]
+        [InlineData("B", 2, 30)]
+        public void AddExactItemsGivesDiscount(string sku, int itemCount, decimal expectedPrice)
         {
-            // Arrange
-            const decimal discountedPrice = 25m;
+            HasCorrectPrice(sku, itemCount, expectedPrice);
+        }
 
+        [Theory]
+        [InlineData("A", 4, 35)]
+        [InlineData("B", 3, 50)]
+        public void AddMoreItemsGivesDiscountOnlyOnMultiBuyItems(string sku, int itemCount, decimal expectedPrice)
+        {
+            HasCorrectPrice(sku, itemCount, expectedPrice);
+        }
+
+        private void HasCorrectPrice(string sku, int itemCount, decimal expectedPrice)
+        {
             // Act
-            _basket.AddSku("A");
-            _basket.AddSku("A");
-            _basket.AddSku("A");
+            for(var i=0; i<itemCount; i++)
+            {
+                _basket.AddSku(sku);
+            }
 
             // Assert
-            Assert.Equal(discountedPrice, _basket.TotalPrice);
+            Assert.Equal(expectedPrice, _basket.TotalPrice);
         }
     }
 

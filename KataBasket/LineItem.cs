@@ -1,4 +1,5 @@
 ﻿using KataBasket.PriceCalculator;
+using System;
 
 namespace KataBasket
 {
@@ -18,5 +19,10 @@ namespace KataBasket
         public int Count { get; private set; }
 
         public decimal TotalPrice => _priceCalculator.Calculate(Count);
+
+        internal void AddItem()
+        {
+            Count++;
+        }
     }
 }

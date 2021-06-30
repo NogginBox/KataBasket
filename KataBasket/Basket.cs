@@ -22,7 +22,14 @@ namespace KataBasket
             var item = _catalogueService.GetItemWithCode(skuCode);
             var pricingCalulator = _pricingService.GetLineItemPricingCalculator(item);
             
-            _lineItems.Add(item.Sku, new LineItem(item, pricingCalulator));
+            if(_lineItems.ContainsKey(item.Sku))
+            {
+                _lineItems[item.Sku].AddItem();
+            }
+            else
+            {
+                _lineItems.Add(item.Sku, new LineItem(item, pricingCalulator));
+            }
         }
 
         private readonly Dictionary<string, LineItem> _lineItems = new();
