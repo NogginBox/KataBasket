@@ -1,23 +1,25 @@
+using KataBasket.Services;
 using Xunit;
 
 namespace KataBasket.Tests
 {
     public class BasketTests
     {
-        private Basket _basket;
+        private readonly Basket _basket;
 
         public BasketTests()
         {
             // Arrange
             var catalogueService = new CatalogueService();
-            _basket = new Basket(catalogueService);
+            var pricingService = new PricingService();
+            _basket = new Basket(catalogueService, pricingService);
         }
 
         [Fact]
         public void EmptyBasketHasZeroTotal()
         {
             // Act / Assert
-            Assert.Equal(0, _basket.Total);
+            Assert.Equal(0, _basket.TotalPrice);
         }
 
         [Fact]
@@ -30,7 +32,7 @@ namespace KataBasket.Tests
             _basket.AddSku("A");
 
             // Assert
-            Assert.Equal(priceOfA, _basket.Total);
+            Assert.Equal(priceOfA, _basket.TotalPrice);
 
         }
 
@@ -45,7 +47,7 @@ namespace KataBasket.Tests
             _basket.AddSku("B");
 
             // Assert
-            Assert.Equal(priceOfAAndB, _basket.Total);
+            Assert.Equal(priceOfAAndB, _basket.TotalPrice);
 
         }
 
@@ -61,7 +63,7 @@ namespace KataBasket.Tests
             _basket.AddSku("A");
 
             // Assert
-            Assert.Equal(discountedPrice, _basket.Total);
+            Assert.Equal(discountedPrice, _basket.TotalPrice);
         }
     }
 

@@ -2,7 +2,8 @@
 {
     public class Item
     {
-        public Price Price { get; set; }
-        public string Sku { get; internal set; }
+        public string Sku { get; internal init; }
+
+        public decimal Price { get; init; }
     }
 }

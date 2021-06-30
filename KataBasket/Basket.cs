@@ -1,25 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using KataBasket.Services;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace KataBasket
 {
     public class Basket
     {
         private readonly CatalogueService _catalogueService;
+        private readonly PricingService _pricingService;
 
-        public Basket(CatalogueService catalogueService)
+        public Basket(CatalogueService catalogueService, PricingService pricingService)
         {
             _catalogueService = catalogueService;
+            _pricingService = pricingService;
         }
 
-        public int Total { get; private set; }
+        public decimal TotalPrice => _lineItems.Sum(i => i.Value.TotalPrice);
 
         public void AddSku(string skuCode)
         {
             var item = _catalogueService.GetItemWithCode(skuCode);
-
-            _lineItems.Add(item.Sku, item);
+            var pricingCalulator = _pricingService.GetLineItemPricingCalculator(item);
+            
+            _lineItems.Add(item.Sku, new LineItem(item, pricingCalulator));
         }
 
-        private Dictionary<string, LineItem> _lineItems = new Dictionary<string, LineItem>();
+        private readonly Dictionary<string, LineItem> _lineItems = new();
     }
 }

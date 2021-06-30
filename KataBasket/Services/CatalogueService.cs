@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KataBasket
+namespace KataBasket.Services
 {
     public class CatalogueService
     {
@@ -8,9 +8,9 @@ namespace KataBasket
         {
             return skuCode switch
             {
-                "A" => new Item { Sku = "A", Price = new Price { Amount = 10 } },
-                "B" => new Item { Sku = "B", Price = new Price { Amount = 20 } },
-                "C" => new Item { Sku = "C", Price = new Price { Amount = 30 } },
+                "A" => new Item { Sku = "A", Price = 10 },
+                "B" => new Item { Sku = "B", Price = 20 },
+                "C" => new Item { Sku = "C", Price = 30 },
                 _ => throw new Exception($"Item with Sku {skuCode} not found")
             };
         }
