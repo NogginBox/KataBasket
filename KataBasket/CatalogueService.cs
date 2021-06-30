@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zenkata
+namespace KataBasket
 {
     public class CatalogueService
     {

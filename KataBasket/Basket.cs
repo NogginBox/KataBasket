@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Zenkata
+namespace KataBasket
 {
     public class Basket
     {
@@ -22,12 +21,5 @@ namespace Zenkata
         }
 
         private Dictionary<string, LineItem> _lineItems = new Dictionary<string, LineItem>();
-    }
-
-    public class LineItem
-    {
-        public Item Item { get; set; }
-
-        public int Count { get; set; }
     }
 }

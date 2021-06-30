@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace Zenkata
+namespace KataBasket.Tests
 {
     public class BasketTests
     {
@@ -65,14 +65,5 @@ namespace Zenkata
         }
     }
 
-    public class Item
-    {
-        public Price Price { get; set; }
-        public string Sku { get; internal set; }
-    }
-
-    public class Price
-    {
-        public int Amount { get; set; } 
-    }
+    
 }
